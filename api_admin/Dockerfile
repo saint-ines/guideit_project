@@ -1,7 +1,15 @@
-FROM symfony/php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
-# extensions PHP
-RUN docker-php-ext-install pdo_pgsql
+# Installer les dépendances nécessaires
+RUN apk add --no-cache \
+    postgresql-dev \
+    libpq \
+    libzip-dev \
+    unzip \
+    curl \
+    && docker-php-ext-install pdo_pgsql
 
-# installation de composer
+# Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /srv/app

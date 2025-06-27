@@ -24,8 +24,9 @@
         <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
     </form>
     <div>
-        <button class="btn btn-light me-2">Se connecter</button>
-        <button class="btn btn-outline-light">S'inscrire</button>
+        <!-- AJOUT : Boutons qui ouvrent les modales -->
+        <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Se connecter</button>
+        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#registerModal">S'inscrire</button>
     </div>
 </nav>
 
@@ -36,7 +37,7 @@
         <div class="carousel-inner">
             {% for city in cities %}
                 <div class="carousel-item {% if loop.first %}active{% endif %}">
-                    <img src="{{ city.image }}" class="d-block w-100" alt="{{ city.name }}">
+                    <img src="{{ asset(city.image) }}" class="d-block w-100" alt="{{ city.name }}">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{{ city.name }}</h5>
                         <p>{{ city.description }}</p>
@@ -58,7 +59,7 @@
         {% for city in cities %}
             <div class="col-md-4 mb-4">
                 <div class="card city-card">
-                    <img src="{{ city.image }}" class="card-img-top" alt="{{ city.name }}">
+                    <img src="{{ asset(city.image) }}" class="d-block w-100" alt="{{ city.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ city.name }}</h5>
                         <p class="card-text">{{ city.description }}</p>
@@ -75,18 +76,73 @@
                 width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="col-md-6 mb-4">
-            <img src="https://source.unsplash.com/600x300/?paris" class="img-fluid rounded" alt="Paris">
+            <img src="{{ asset(cities[0].image) }}" class="img-fluid rounded" alt="Paris">
         </div>
     </div>
 </div>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer class="bg-dark text-light text-center py-4 mt-5">
     <p>Contact : contact@travelparadise.com | Téléphone : +32 465 00 00</p>
     <p>Adresse : 60 Rue du trône 1050 Bruxelles</p>
     <p>&copy; 2025 TravelParadise. Tous droits réservés.</p>
 </footer>
 
+<!-- AJOUT : MODALE CONNEXION -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Adresse email</label>
+                    <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- AJOUT : MODALE INSCRIPTION -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="registerName" class="form-label">Nom complet</label>
+                    <input type="text" class="form-control" id="registerName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="registerEmail" class="form-label">Adresse email</label>
+                    <input type="email" class="form-control" id="registerEmail" required>
+                </div>
+                <div class="mb-3">
+                    <label for="registerPassword" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="registerPassword" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">S'inscrire</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
